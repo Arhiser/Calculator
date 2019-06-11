@@ -101,7 +101,44 @@ public class CalculatorModel {
     }
 
     public String getText() {
-        return inputStr.toString();
+        StringBuilder str = new StringBuilder();
+        switch (state) {
+            default:
+                return inputStr.toString();
+            case operationSelected:
+                return str.append(firstArg).append(' ')
+                        .append(getOperationChar())
+                        .toString();
+            case secondArgInput:
+                return str.append(firstArg).append(' ')
+                        .append(getOperationChar())
+                        .append(' ')
+                        .append(inputStr)
+                        .toString();
+            case resultShow:
+                return str.append(firstArg).append(' ')
+                        .append(getOperationChar())
+                        .append(' ')
+                        .append(secondArg)
+                        .append(" = ")
+                        .append(inputStr.toString())
+                        .toString();
+        }
+    }
+
+    private char getOperationChar() {
+        switch (actionSelected) {
+            case R.id.plus:
+                return '+';
+            case R.id.minus:
+                return '-';
+            case R.id.multiply:
+                return '*';
+            case R.id.division:
+            default:
+                return '/';
+
+        }
     }
 
     public void reset() {
