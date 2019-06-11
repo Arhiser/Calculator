@@ -13,6 +13,7 @@ public class CalculatorModel {
 
     private enum State {
         firstArgInput,
+        operationSelected,
         secondArgInput,
         resultShow
     }
@@ -25,6 +26,11 @@ public class CalculatorModel {
 
         if (state == State.resultShow) {
             state = State.firstArgInput;
+            inputStr.setLength(0);
+        }
+
+        if (state == State.operationSelected) {
+            state = State.secondArgInput;
             inputStr.setLength(0);
         }
 
@@ -89,26 +95,17 @@ public class CalculatorModel {
 
         } else if (inputStr.length() > 0 && state == State.firstArgInput) {
             firstArg = Integer.parseInt(inputStr.toString());
-            state = State.secondArgInput;
-            inputStr.setLength(0);
-            switch (actionId) {
-                case R.id.plus:
-                    actionSelected = R.id.plus;
-                    break;
-                case R.id.minus:
-                    actionSelected = R.id.minus;
-                    break;
-                case R.id.multiply:
-                    actionSelected = R.id.multiply;
-                    break;
-                case R.id.division:
-                    actionSelected = R.id.division;
-                    break;
-            }
+            state = State.operationSelected;
+            actionSelected = actionId;
         }
     }
 
     public String getText() {
         return inputStr.toString();
+    }
+
+    public void reset() {
+        state = State.firstArgInput;
+        inputStr.setLength(0);
     }
 }

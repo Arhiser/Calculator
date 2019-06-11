@@ -162,9 +162,10 @@
                 style="@style/calc_button"
                 android:text="/"/>
 
-            <View
+            <Button
+                android:id="@+id/reset"
                 style="@style/calc_button"
-                android:visibility="invisible"/>
+                android:text="C"/>
 
         </LinearLayout>
 
