@@ -93,7 +93,7 @@ public class CalculatorModel {
                     break;
             }
 
-        } else if (inputStr.length() > 0 && state == State.firstArgInput) {
+        } else if (inputStr.length() > 0 && state == State.firstArgInput && actionId != R.id.equals) {
             firstArg = Integer.parseInt(inputStr.toString());
             state = State.operationSelected;
             actionSelected = actionId;
